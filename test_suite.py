@@ -75,7 +75,6 @@ async def run(key, method, format, **kwargs):
         deepgram_url += "&encoding=linear16&sample_rate=16000"
         callback_url = kwargs.get("callback_url", None)
         if callback_url is not None:
-            print(callback_url)
             deepgram_url += f"&callback={callback_url}"
 
     elif method == "wav":
