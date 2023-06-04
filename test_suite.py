@@ -69,7 +69,7 @@ def mic_callback(input_data, frame_count, time_info, status_flag):
 
 
 async def run(key, method, format, **kwargs):
-    deepgram_url = "wss://api.deepgram.com/v1/listen?punctuate=true"
+    deepgram_url = "wss://api.deepgram.com/v1/listen?punctuate=true&language=en-GB"
 
     if method == "mic":
         deepgram_url += "&encoding=linear16&sample_rate=16000"
