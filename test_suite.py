@@ -73,6 +73,10 @@ async def run(key, method, format, **kwargs):
 
     if method == "mic":
         deepgram_url += "&encoding=linear16&sample_rate=16000"
+        callback_url = kwargs.get("callback_url", None)
+        if callback_url is not None:
+            print(callback_url)
+            deepgram_url += f"&callback={callback_url}"
 
     elif method == "wav":
         data = kwargs["data"]
@@ -320,6 +324,16 @@ def parse_args():
         default="text",
         type=validate_format,
     )
+    # add new argument for callback url
+    parser.add_argument(
+        "-c",
+        "--callback_url",
+        help="URL to send final transcript to",
+        nargs="?",
+        const=1,
+        default=None,
+        type=str,
+    )
     return parser.parse_args()
 
 
@@ -329,10 +343,11 @@ def main():
     args = parse_args()
     input = args.input
     format = args.format.lower()
+    callback_url = args.callback_url
 
     try:
         if input.lower().startswith("mic"):
-            asyncio.run(run(args.key, "mic", format))
+            asyncio.run(run(args.key, "mic", format, callback_url=callback_url))
 
         elif input.lower().endswith("wav"):
             if os.path.exists(input):
