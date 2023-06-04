@@ -25,8 +25,11 @@ You must have:
 ### Installation
 
 1. Clone the [streaming test suite](https://github.com/deepgram/streaming-test-suite/) repository
-1. Install [portaudio](http://portaudio.com/), if it is not already installed
-1. `pip install -r requirements.txt` 
+1. Install [portaudio](http://portaudio.com/), if it is not already installed, you can also do this with `brew install portaudio` on macOS
+1. setup a python virtual environment:
+    1. `python -m venv venv`
+    1. `source venv/bin/activate`
+1. `pip install -r requirements.txt`
 
 ## 1. Streaming a Local Source
 
@@ -67,6 +70,10 @@ The streaming test suite also has the ability to send audio from your microphone
 First, make sure [pyaudio](https://pypi.org/project/PyAudio/) and its [portaudio](http://portaudio.com/) dependency are installed, and you have a microphone connected to your computer. Then, run:
 
 `python test_suite.py -k YOUR_DEEPGRAM_API_KEY -i mic`
+
+You can also specify a callback url flag for Deepgram to send results to:
+
+`python test_suite.py -k YOUR_DEEPGRAM_API_KEY -i mic -c wss://your.callback.url`
 
 ## Subtitle Generation
 
